@@ -1,4 +1,4 @@
-# API for App in main branch
+# API for [fontend App](https://github.com/TruongNoDame/vietnamese_htr_frontend/tree/vietnamese_htr_api)
 
 Our repo will provide a Vietnamese handwriting recognition API using FastAPI. The models we use are two state-of-the-art models of scene text recognition, [CLIP4STR](https://github.com/VamosC/CLIP4STR) and [PARSeq](https://github.com/baudm/parseq).
 
