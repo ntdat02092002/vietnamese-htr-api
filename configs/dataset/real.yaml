@@ -1,0 +1,4 @@
+# @package _global_
+data:
+  train_dir: test_real
+  val_dir: test_real

@@ -1,0 +1,4 @@
+# @package _global_
+data:
+  train_dir: only_iam
+  val_dir: only_iam

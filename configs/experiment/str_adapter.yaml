@@ -1,0 +1,9 @@
+# @package _global_
+defaults:
+  - override /model: str_adapter
+
+model:
+  img_size: [ 224, 224 ]   # [ height, width ]
+  patch_size: [ 16, 16 ]    # [ height, width ]
+
+  clip_pretrained: /datnt/CLIP4STR/pretrained/clip/ViT-B-16.pt

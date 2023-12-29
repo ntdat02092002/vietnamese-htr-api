@@ -1,0 +1,4 @@
+# @package _global_
+data:
+  train_dir: htr_real_ver1
+  val_dir: htr_real_ver1
