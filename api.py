@@ -13,11 +13,14 @@ from io import BytesIO
 from strhub.data.module import SceneTextDataModule
 from strhub.models.utils import load_from_checkpoint, parse_model_args
 
+from utils import download_pretrained_clip
+
 DEVICE = "cuda"
 CHECKPOINT = "./weight/vl4str/epoch=87-step=179942-val_accuracy=90.1811-val_NED=96.4276.ckpt"
 
 def load_model():
     print("load model")
+    download_pretrained_clip('vl4str-base32')
     model = load_from_checkpoint(CHECKPOINT, **{}).eval().to(DEVICE)
     img_transform = SceneTextDataModule.get_transform(model.hparams.img_size)
     print("load model successfully")
@@ -63,7 +66,7 @@ def process_image(base64_data):
 
 @app.get("/")
 async def home(request: Request):
-    return {message: "hello"}
+    return {'message': "hello"}
 
 @app.post("/predict/")
 async def process_image_endpoint(request: Request):
@@ -89,4 +92,4 @@ if __name__ == '__main__':
     import uvicorn
 
     app_str = 'api:app'
-    uvicorn.run(app_str, host='0.0.0.0', port=8080, reload=True, workers=1)
+    uvicorn.run(app_str, host='0.0.0.0', port=8080, reload=False, workers=1)
