@@ -9,18 +9,21 @@ from PIL import Image
 from torch import inference_mode
 import base64
 from io import BytesIO
+from dotenv import dotenv_values
 
 from strhub.data.module import SceneTextDataModule
 from strhub.models.utils import load_from_checkpoint, parse_model_args
 
 from utils import download_pretrained_clip
 
-DEVICE = "cuda"
-CHECKPOINT = "./weight/vl4str/epoch=87-step=179942-val_accuracy=90.1811-val_NED=96.4276.ckpt"
+config = dotenv_values(".env")
+DEVICE = config['DEVICE']
+CHECKPOINT = config['CHECKPOINT']
 
 def load_model():
     print("load model")
-    download_pretrained_clip('vl4str-base32')
+    if config['MODEL_NAME'].lower() in ("vl4str", "clip4str"):
+        download_pretrained_clip(config['EXPERIMENT'].lower())
     model = load_from_checkpoint(CHECKPOINT, **{}).eval().to(DEVICE)
     img_transform = SceneTextDataModule.get_transform(model.hparams.img_size)
     print("load model successfully")
@@ -92,4 +95,4 @@ if __name__ == '__main__':
     import uvicorn
 
     app_str = 'api:app'
-    uvicorn.run(app_str, host='0.0.0.0', port=8080, reload=False, workers=1)
+    uvicorn.run(app_str, host='0.0.0.0', port=int(config['PORT']), reload=False, workers=1)
