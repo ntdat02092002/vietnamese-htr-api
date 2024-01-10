@@ -4,7 +4,7 @@ Our repo will provide a Vietnamese handwriting recognition API using FastAPI. Th
 
 To use our repository, it is recommended to have a GPU for accelerated processing speed (using CPU will be slower)
 
-## 1. Run api
+## 1. Run API
 
 Before running the code, you need to train the model from [this repository](https://github.com/VamosC/CLIP4STR) and place the model file in the corresponding path: `./weight/<model_name>/<file_ckpt>`. Here, the model_name is the name of the model you have selected, and file_ckpt is the name of the model file obtained during training.
 
