@@ -20,8 +20,14 @@ config = dotenv_values(".env")
 DEVICE = config['DEVICE']
 CHECKPOINT = config['CHECKPOINT']
 
+app = FastAPI()
+
+# Global variables for model and image transformation
+model = None
+img_transform = None
+
 def load_model():
-    print("load model")
+    print("loading model...")
     if config['MODEL_NAME'].lower() in ("vl4str", "clip4str"):
         download_pretrained_clip(config['EXPERIMENT'].lower())
     model = load_from_checkpoint(CHECKPOINT, **{}).eval().to(DEVICE)
@@ -29,9 +35,11 @@ def load_model():
     print("load model successfully")
     return model, img_transform
 
-model, img_transform = load_model()
-
-app = FastAPI()
+# Define a startup event to load the model only once
+@app.on_event("startup")
+async def startup_event():
+    global model, img_transform
+    model, img_transform = load_model()
 
 origins = [
     "http://localhost",
