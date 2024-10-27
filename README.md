@@ -12,6 +12,13 @@ Alternatively, you can download and use the pre-trained model files that we have
 
 ### Config
 Modify the environment variables in the `.env` file to match your selected model as well as the configuration of the API you intend to run.
+- **ABI-Net and PARSeq**
+  - `model_name`: `abinet` or `parseq`
+  - `experiment`: `abinet` or `parseq`
+  
+- **CLIP4STR**
+  - `model_name`: `vl4str`
+  - `experiment`: `vl4str-base32`
 
 ### Start API
 Use the command: 
