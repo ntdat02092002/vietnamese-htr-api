@@ -19,7 +19,7 @@ from .modules import DecoderLayer, Decoder, modify_attn_mask
 
 
 # an alternative choice when the input argument is not valid 
-CLIP_PATH = '/workplace/vietnamese-htr-api/weight/vl4str/clip'
+CLIP_PATH = os.path.join(os.getcwd(), "weight", "vl4str", "clip")
 
 
 class VL4STR(CrossEntropySystem):
